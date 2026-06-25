@@ -931,11 +931,22 @@ function sendAi(){
   b.innerHTML+=`<div class="ai-m user">${m}</div>`;
   i.value='';
   b.scrollTop=b.scrollHeight;
-  setTimeout(()=>{
-    const r=['بناءً على بياناتك، أنصح بزراعة القمح هذا الموسم.','درجة الحرارة مرتفعة غداً - رش في الصباح الباكر.','نسبة النيتروجين منخفضة - أضف سماد نشادر ٢٠٠ كجم.','تم رصد آفة في حقلك - رش المبيد خلال ٤٨ ساعة.','سعر القمح في ارتفاع - بيع الآن أفضل توقيت.'];
-    b.innerHTML+=`<div class="ai-m bot">🤖 ${r[Math.floor(Math.random()*r.length)]}</div>`;
+  const base = window.AGRIVISION_API_BASE || '';
+  fetch(`${base}/api/chatbot/ask`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({message: m})
+  })
+  .then(r => r.json())
+  .then(data => {
+    const reply = (data && data.reply) ? data.reply : 'حصل خطأ في الاتصال بالمساعد، حاول مرة أخرى.';
+    b.innerHTML+=`<div class="ai-m bot">🤖 ${reply}</div>`;
     b.scrollTop=b.scrollHeight;
-  },800);
+  })
+  .catch(() => {
+    b.innerHTML+=`<div class="ai-m bot">🤖 تعذّر الاتصال بالمساعد الآن، تأكد من اتصالك بالإنترنت وحاول مرة أخرى.</div>`;
+    b.scrollTop=b.scrollHeight;
+  });
 }
 
 // ===== UTILS =====
@@ -951,6 +962,6 @@ function showNotif(){
     <script>
 window.AGRIVISION_API_BASE = (location.hostname==='localhost'||location.hostname==='127.0.0.1') ? 'http://localhost:8000' : 'https://zidanmustafa77-zidan-backend.hf.space';
 </script>
-<script src="api.js?v=20260626002956"></script>
+<script src="api.js?v=20260626005643"></script>
 </body>
 </html>

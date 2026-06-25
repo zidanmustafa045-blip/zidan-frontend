@@ -1,0 +1,6 @@
+.vercel
+
+.netlify/
+.vercel/
+*.flag
+

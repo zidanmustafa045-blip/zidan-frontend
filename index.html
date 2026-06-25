@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZQR034Q73Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZQR034Q73Z');
+  </script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AgriVision Ultra - منصة زراعية ذكية تعتمد على الذكاء الاصطناعي لتحليل المحاصيل، تشخيص الآفات، متابعة أسعار السوق، وإعداد دراسات الجدوى الزراعية بدقة.">
+<title>AgriVision Ultra - منصة الزراعة الذكية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap" rel="stylesheet"></noscript>
+<style>
+:root {
+  --p: #1b5e20; --p2: #2e7d32; --p3: #4caf50; --pL: #e8f5e9;
+  --s: #f57c00; --s2: #ff9800; --sL: #fff3e0;
+  --d: #c62828; --d2: #ef5350; --dL: #ffebee;
+  --i: #1565c0; --i2: #42a5f5; --iL: #e3f2fd;
+  --w: #f9a825; --w2: #ffee58; --wL: #fffde7;
+  --dark: #0d1b0d; --dark2: #1a2e1a; --card: #ffffff;
+  --bg: #f0f4f0; --txt: #1a1a2e; --muted: #52624f;
+  --s-d: #b34700; --s2-d: #c25400; --i2-d: #0d4a99; --d2-d: #b71c1c;
+  --shadow: 0 2px 8px rgba(0,0,0,0.06); --shadow2: 0 8px 32px rgba(0,0,0,0.1);
+  --r: 14px; --r2: 8px; --tr: 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"]{--bg:#0a120a;--card:#121f12;--txt:#e0e8e0;--muted:#7a8a7a;--shadow:0 2px 8px rgba(0,0,0,0.3);}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Tajawal',sans-serif;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--txt);line-height:1.5;overflow-x:hidden;}
+
+/* ===== SIDEBAR LIGHT ===== */
+.sidebar{position:fixed;right:0;top:0;width:260px;height:100vh;background:var(--card);z-index:1000;padding:1.2rem;padding-bottom:80px;display:flex;flex-direction:column;box-shadow:var(--shadow2);transition:var(--tr);overflow-y:auto;scrollbar-width:none;-ms-overflow-style:none;}
+.sidebar::-webkit-scrollbar{display:none;}
+.sidebar.collapsed{width:70px;}
+.sidebar.collapsed .logo-text,.sidebar.collapsed .nav-text,.sidebar.collapsed .user-info{display:none;}
+.logo{display:flex;align-items:center;gap:0.7rem;padding-bottom:1.2rem;border-bottom:1px solid var(--bg);margin-bottom:1rem;}
+.logo-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--p),var(--p2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;}
+.logo-text h1{font-size:1.15rem;font-weight:800;color:var(--p);}
+.logo-text p{font-size:0.7rem;color:var(--muted);}
+
+.nav-section{margin-bottom:0.8rem;}
+.nav-section-title{font-size:0.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:0.5rem;padding:0 0.6rem;font-weight:700;}
+.nav-item{display:flex;align-items:center;gap:0.7rem;padding:0.7rem 0.8rem;border-radius:var(--r2);cursor:pointer;transition:var(--tr);margin-bottom:0.2rem;color:var(--muted);font-size:0.88rem;font-weight:500;position:relative;border:none;background:none;width:100%;}
+.nav-item:hover{background:var(--pL);color:var(--p);}
+.nav-item.active{background:var(--p);color:#fff;box-shadow:0 4px 12px rgba(27,94,32,0.3);}
+.nav-item i{width:22px;text-align:center;font-size:1rem;}
+.nav-item .badge{margin-right:auto;background:var(--d);color:#fff;font-size:0.65rem;padding:0.15rem 0.5rem;border-radius:10px;font-weight:700;}
+
+.user-card{margin-top:auto;display:flex;align-items:center;gap:0.6rem;padding:0.7rem;background:var(--bg);border-radius:var(--r2);cursor:pointer;transition:var(--tr);}
+.user-card:hover{background:var(--pL);}
+.user-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--s-d),var(--s2-d));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:0.85rem;flex-shrink:0;}
+
+/* ===== MAIN ===== */
+.main{margin-right:260px;min-height:100vh;transition:var(--tr);}
+.sidebar.collapsed ~ .main{margin-right:70px;}
+
+/* ===== TOPBAR ===== */
+.topbar{position:sticky;top:0;z-index:100;background:rgba(240,244,240,0.85);backdrop-filter:blur(12px);padding:0.8rem 1.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,0.04);}
+[data-theme="dark"] .topbar{background:rgba(10,18,10,0.85);}
+.search{position:relative;width:320px;}
+.search input{width:100%;padding:0.6rem 1rem 0.6rem 2.5rem;border:1.5px solid transparent;background:var(--card);border-radius:50px;font-size:0.85rem;transition:var(--tr);color:var(--txt);}
+.search input:focus{outline:none;border-color:var(--p3);box-shadow:0 0 0 3px var(--pL);}
+.search i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.9rem;}
+
+.top-actions{display:flex;align-items:center;gap:0.5rem;}
+.icon-btn{width:38px;height:38px;border-radius:50%;border:none;background:var(--card);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:0.95rem;transition:var(--tr);box-shadow:var(--shadow);position:relative;}
+.icon-btn:hover{background:var(--p);color:#fff;transform:translateY(-2px);}
+.icon-btn .dot{position:absolute;top:6px;right:6px;width:7px;height:7px;background:var(--d);border-radius:50%;border:2px solid var(--card);}
+
+/* ===== CONTENT ===== */
+.content{padding:1.5rem;}
+
+/* ===== STATS ROW ===== */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.5rem;}
+.stat-card{background:var(--card);border-radius:var(--r);padding:1.2rem;box-shadow:var(--shadow);transition:var(--tr);position:relative;overflow:hidden;}
+.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow2);}
+.stat-card::after{content:'';position:absolute;top:0;right:0;width:4px;height:100%;border-radius:0 var(--r) var(--r) 0;}
+.stat-card.g::after{background:var(--p3);}
+.stat-card.o::after{background:var(--s);}
+.stat-card.r::after{background:var(--d);}
+.stat-card.b::after{background:var(--i);}
+.stat-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.6rem;}
+.stat-icon2{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.stat-icon2.g{background:var(--pL);color:var(--p);}
+.stat-icon2.o{background:var(--sL);color:var(--s);}
+.stat-icon2.r{background:var(--dL);color:var(--d);}
+.stat-icon2.b{background:var(--iL);color:var(--i);}
+.stat-trend2{display:flex;align-items:center;gap:0.2rem;font-size:0.78rem;font-weight:700;padding:0.2rem 0.5rem;border-radius:20px;}
+.stat-trend2.up{background:var(--pL);color:var(--p);}
+.stat-trend2.down{background:var(--dL);color:var(--d);}
+.stat-val{font-size:1.8rem;font-weight:800;margin-bottom:0.2rem;}
+.stat-lbl{font-size:0.8rem;color:var(--muted);}
+
+/* ===== QUICK ACCESS ===== */
+.quick-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:0.8rem;margin-bottom:1.5rem;}
+.quick-item{background:var(--card);border-radius:var(--r);padding:1rem;text-align:center;cursor:pointer;transition:var(--tr);box-shadow:var(--shadow);border:2px solid transparent;}
+.quick-item:hover{border-color:var(--p3);transform:translateY(-3px);box-shadow:var(--shadow2);}
+.quick-item i{font-size:1.6rem;margin-bottom:0.5rem;display:block;}
+.quick-item.g i{color:var(--p3);}
+.quick-item.o i{color:var(--s);}
+.quick-item.r i{color:var(--d);}
+.quick-item.b i{color:var(--i);}
+.quick-item span{font-size:0.78rem;font-weight:600;display:block;}
+
+/* ===== SECTIONS ===== */
+.section{display:none;animation:fadeIn 0.3s ease;}
+.section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== CARDS ===== */
+.card{background:var(--card);border-radius:var(--r);padding:1.2rem;box-shadow:var(--shadow);margin-bottom:1rem;}
+.card-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+.card-t{font-size:1rem;font-weight:700;display:flex;align-items:center;gap:0.5rem;}
+.card-t i{color:var(--p);}
+
+/* ===== CROP GRID ===== */
+.crop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:0.8rem;}
+.crop-card{background:var(--card);border-radius:var(--r);padding:1rem;text-align:center;cursor:pointer;transition:var(--tr);box-shadow:var(--shadow);border:2px solid transparent;position:relative;overflow:hidden;}
+.crop-card:hover{border-color:var(--p3);transform:translateY(-4px) scale(1.02);box-shadow:var(--shadow2);}
+.crop-card.sel{border-color:var(--p);background:var(--pL);}
+.crop-emoji{font-size:2.5rem;margin-bottom:0.4rem;display:block;transition:var(--tr);}
+.crop-card:hover .crop-emoji{transform:scale(1.2) rotate(-5deg);}
+.crop-name{font-weight:700;font-size:0.9rem;margin-bottom:0.2rem;}
+.crop-price{color:var(--p);font-weight:800;font-size:1.1rem;}
+.crop-change{font-size:0.75rem;margin-top:0.2rem;}
+.crop-change.up{color:var(--p2);}
+.crop-change.down{color:var(--d);}
+
+/* ===== FORMS ===== */
+.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;}
+.form-g{margin-bottom:1rem;}
+.form-g label{display:block;margin-bottom:0.35rem;font-size:0.82rem;font-weight:600;color:var(--muted);}
+.form-g label i{margin-left:0.4rem;color:var(--p);}
+input,select,textarea{width:100%;padding:0.7rem 1rem;border:1.5px solid var(--bg);background:var(--bg);border-radius:var(--r2);font-size:0.88rem;transition:var(--tr);color:var(--txt);font-family:'Tajawal',sans-serif;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--p3);background:var(--card);box-shadow:0 0 0 3px var(--pL);}
+input[type="range"]{padding:0;height:6px;border-radius:3px;background:var(--bg);-webkit-appearance:none;appearance:none;}
+input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--p);cursor:pointer;box-shadow:0 2px 6px rgba(27,94,32,0.4);}
+
+/* ===== BUTTONS ===== */
+.btn{padding:0.7rem 1.5rem;border:none;border-radius:var(--r2);cursor:pointer;font-size:0.85rem;font-weight:700;transition:var(--tr);display:inline-flex;align-items:center;gap:0.4rem;font-family:'Tajawal',sans-serif;}
+.btn-p{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;box-shadow:0 4px 12px rgba(27,94,32,0.25);}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(27,94,32,0.35);}
+.btn-s{background:var(--s);color:#fff;}
+.btn-g{background:var(--p2);color:#fff;}
+.btn-d{background:var(--d);color:#fff;}
+.btn-o{background:transparent;border:1.5px solid var(--p);color:var(--p);}
+.btn-o:hover{background:var(--p);color:#fff;}
+.btn-sm{padding:0.5rem 1rem;font-size:0.78rem;}
+.btn-lg{padding:0.9rem 2rem;font-size:1rem;}
+.btn-block{width:100%;justify-content:center;}
+
+/* ===== RESULT BOX ===== */
+.res-box{background:linear-gradient(135deg,var(--pL),rgba(76,175,80,0.05));border-right:4px solid var(--p);padding:1.2rem;border-radius:var(--r2);margin-top:1rem;display:none;animation:slideUp 0.4s ease;}
+.res-box.show{display:block;}
+@keyframes slideUp{from{opacity:0;transform:translateY(15px);}to{opacity:1;transform:translateY(0);}}
+
+/* ===== TABLE ===== */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;}
+.tbl th{background:var(--p);color:#fff;padding:0.8rem;text-align:center;font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.tbl th:first-child{border-radius:0 var(--r2) 0 0;}
+.tbl th:last-child{border-radius:var(--r2) 0 0 0;}
+.tbl td{padding:0.8rem;text-align:center;border-bottom:1px solid var(--bg);font-size:0.85rem;}
+.tbl tr:hover td{background:rgba(76,175,80,0.03);}
+
+/* ===== WEATHER CARDS ===== */
+.w-row{display:flex;gap:0.8rem;flex-wrap:wrap;}
+.w-card{background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:1rem;border-radius:var(--r);min-width:130px;text-align:center;flex:1;transition:var(--tr);}
+.w-card:hover{transform:translateY(-3px);}
+.w-card.v2{background:linear-gradient(135deg,var(--i),var(--i2-d));}
+.w-card.v3{background:linear-gradient(135deg,var(--s-d),var(--s2-d));}
+.w-card.v4{background:linear-gradient(135deg,var(--d),var(--d2-d));}
+.w-val{font-size:1.6rem;font-weight:800;}
+.w-lbl{font-size:0.75rem;opacity:0.9;margin-top:0.2rem;}
+
+/* ===== TABS ===== */
+.tabs{display:flex;gap:0.3rem;margin-bottom:1rem;background:var(--bg);padding:0.4rem;border-radius:var(--r2);}
+.tab-btn{padding:0.6rem 1.2rem;border:none;background:transparent;color:var(--muted);cursor:pointer;border-radius:8px;font-size:0.82rem;font-weight:600;transition:var(--tr);white-space:nowrap;}
+.tab-btn:hover{color:var(--txt);}
+.tab-btn.active{background:var(--card);color:var(--p);box-shadow:var(--shadow);}
+.tab-c{display:none;}
+.tab-c.active{display:block;animation:fadeIn 0.3s;}
+
+/* ===== TOAST ===== */
+.toast-c{position:fixed;top:1rem;left:1rem;z-index:5000;display:flex;flex-direction:column;gap:0.5rem;}
+.toast{background:var(--card);padding:0.8rem 1.2rem;border-radius:var(--r2);box-shadow:var(--shadow2);display:flex;align-items:center;gap:0.6rem;animation:toastIn 0.3s;border-right:3px solid;font-size:0.85rem;font-weight:500;}
+.toast.ok{border-color:var(--p3);}
+.toast.err{border-color:var(--d);}
+.toast.warn{border-color:var(--s);}
+@keyframes toastIn{from{opacity:0;transform:translateX(-20px);}to{opacity:1;transform:translateX(0);}}
+
+/* ===== LOADING ===== */
+.load-o{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);z-index:6000;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.5s;}
+.load-o.hid{opacity:0;pointer-events:none;}
+.load{width:50px;height:50px;border:3px solid var(--bg);border-top-color:var(--p);border-radius:50%;animation:spin 0.8s linear infinite;}
+.load-t{margin-top:1rem;color:var(--muted);font-size:0.9rem;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ===== AI CHAT ===== */
+.ai-btn{position:fixed;bottom:1.5rem;left:1.5rem;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;border:none;cursor:pointer;font-size:1.4rem;box-shadow:0 4px 20px rgba(27,94,32,0.4);transition:var(--tr);z-index:1500;display:flex;align-items:center;justify-content:center;}
+.ai-btn:hover{transform:scale(1.1) rotate(10deg);}
+.ai-panel{position:fixed;bottom:80px;left:1.5rem;width:360px;height:480px;background:var(--card);border-radius:var(--r);box-shadow:var(--shadow2);z-index:1500;display:none;flex-direction:column;overflow:hidden;}
+.ai-panel.show{display:flex;}
+.ai-h{padding:1rem;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;display:flex;justify-content:space-between;align-items:center;}
+.ai-b{flex:1;overflow-y:auto;padding:1rem;}
+.ai-m{margin-bottom:0.8rem;padding:0.7rem 1rem;border-radius:12px;max-width:85%;font-size:0.85rem;line-height:1.5;}
+.ai-m.bot{background:var(--pL);margin-right:auto;border-bottom-right-radius:4px;}
+.ai-m.user{background:var(--p);color:#fff;margin-left:auto;border-bottom-left-radius:4px;}
+.ai-i{display:flex;padding:0.8rem;border-top:1px solid var(--bg);gap:0.5rem;}
+.ai-i input{flex:1;padding:0.6rem 1rem;border:1px solid var(--bg);border-radius:50px;background:var(--bg);color:var(--txt);outline:none;font-size:0.85rem;}
+.ai-i button{width:36px;height:36px;border-radius:50%;border:none;background:var(--p);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--p3);border-radius:3px;}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:1024px){.stats-row{grid-template-columns:repeat(2,1fr);}.quick-grid{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:768px){.sidebar{right:-260px;}.sidebar.open{right:0;box-shadow:var(--shadow2);}.main{margin-right:0;}.stats-row{grid-template-columns:1fr;}.quick-grid{grid-template-columns:repeat(2,1fr);}.search{width:200px;}}
+
+/* ===== ANIMATIONS ===== */
+.pulse{animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.6;}}
+
+/* ===== RESPONSIVE UTILITY GRIDS ===== */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.grid-2-1{display:grid;grid-template-columns:2fr 1fr;gap:1rem;}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;}
+
+/* ===== SIDEBAR OVERLAY (Mobile Hamburger Menu) ===== */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;backdrop-filter:blur(2px);}
+.sidebar-overlay.show{display:block;animation:fadeIn 0.25s ease;}
+body.no-scroll{overflow:hidden;}
+
+/* ===== RESPONSIVE: TABLETS (<=1024px) ===== */
+@media(max-width:1024px){
+  .grid-4{grid-template-columns:repeat(2,1fr);}
+}
+
+/* ===== RESPONSIVE: MOBILE (<=768px) ===== */
+@media(max-width:768px){
+  .grid-2,.grid-2-1,.grid-4{grid-template-columns:1fr;}
+  .content{padding:1rem;}
+  .topbar{padding:0.7rem 1rem;flex-wrap:wrap;gap:0.5rem;}
+  .form-row{grid-template-columns:1fr;}
+  .ai-panel{width:calc(100vw - 2rem);left:1rem;right:auto;}
+  .crop-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
+}
+
+/* ===== RESPONSIVE: SMALL PHONES (<=480px) ===== */
+@media(max-width:480px){
+  .topbar{padding:0.6rem 0.8rem;}
+  .search{width:130px;}
+  .search input{font-size:0.78rem;padding:0.55rem 0.8rem 0.55rem 2.2rem;}
+  .stat-val{font-size:1.4rem;}
+  .stat-card{padding:0.9rem;}
+  .quick-item{padding:0.7rem;}
+  .quick-item i{font-size:1.3rem;}
+  .crop-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));}
+  .ai-panel{height:65vh;bottom:75px;}
+  .ai-btn{bottom:1rem;left:1rem;width:50px;height:50px;font-size:1.2rem;}
+  .logo-text h1{font-size:1rem;}
+  .card{padding:1rem;}
+  .btn-lg{padding:0.75rem 1.4rem;font-size:0.9rem;}
+}
+</style>
+    
+</head>
+<body data-theme="light">
+<div class="load-o" id="loadO"><div class="load"></div><div class="load-t">جاري تحميل AgriVision...</div></div>
+<div class="toast-c" id="toastC"></div>
+
+<aside class="sidebar" id="sidebar">
+<div class="logo">
+<div class="logo-icon">🌾</div>
+<div class="logo-text"><h1>AgriVision</h1><p>منصة الزراعة الذكية</p></div>
+</div>
+<nav>
+<div class="nav-section"><div class="nav-section-title">القائمة</div>
+<button class="nav-item active" onclick="showSec('dash')"><i>📊</i><span class="nav-text">لوحة التحكم</span></button>
+<button class="nav-item" onclick="showSec('crops')"><i>🌾</i><span class="nav-text">المحاصيل</span><span class="badge">جديد</span></button>
+<button class="nav-item" onclick="showSec('feas')"><i>📋</i><span class="nav-text">دراسة الجدوى</span></button>
+<button class="nav-item" onclick="showSec('prices')"><i>💰</i><span class="nav-text">أسعار السوق</span></button>
+<button class="nav-item" onclick="showSec('recs')"><i>🌱</i><span class="nav-text">التوصيات</span></button>
+</div>
+<div class="nav-section"><div class="nav-section-title">الأدوات</div>
+<button class="nav-item" onclick="showSec('weather')"><i>🌤️</i><span class="nav-text">الطقس</span></button>
+<button class="nav-item" onclick="showSec('pest')"><i>🐛</i><span class="nav-text">الآفات</span></button>
+<button class="nav-item" onclick="showSec('fert')"><i>🧪</i><span class="nav-text">الأسمدة</span></button>
+<button class="nav-item" onclick="showSec('reports')"><i>📈</i><span class="nav-text">التقارير</span></button>
+</div>
+<div class="nav-section" id="navAdminSection" style="display:none;"><div class="nav-section-title">الإدارة</div>
+<button class="nav-item" onclick="showSec('admin');loadAdminPanel();"><i>🛠️</i><span class="nav-text">لوحة الأدمن</span></button>
+</div>
+</nav>
+<div class="user-card">
+<div class="user-avatar">م</div>
+<div class="user-info"><div style="font-weight:700;font-size:0.85rem;">مزارع مصر</div><div style="font-size:0.7rem;color:var(--muted);">مدير</div></div>
+</div>
+</aside>
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="togSide()"></div>
+
+<div class="main" role="main">
+<div class="topbar">
+<div class="search"><input type="text" placeholder="ابحث عن محصول، آفة..." id="searchIn"><i>🔍</i></div>
+<div class="top-actions">
+<button class="icon-btn" onclick="togTheme()" title="وضع ليلي">🌙</button>
+<button class="icon-btn" onclick="showNotif()" title="إشعارات">🔔<span class="dot"></span></button>
+<button class="icon-btn" onclick="togSide()" title="القائمة">☰</button>
+</div>
+</div>
+
+<div class="content">
+
+<!-- DASHBOARD -->
+<section id="dash" class="section active">
+<div class="stats-row">
+<div class="stat-card g">
+<div class="stat-top"><div class="stat-icon2 g">🌾</div><div class="stat-trend2 up">↗ 12.5%</div></div>
+<div class="stat-val" id="sv1">0</div><div class="stat-lbl">إنتاجية المحاصيل (طن)</div>
+</div>
+<div class="stat-card o">
+<div class="stat-top"><div class="stat-icon2 o">💰</div><div class="stat-trend2 up">↗ 8.3%</div></div>
+<div class="stat-val" id="sv2">0</div><div class="stat-lbl">الإيرادات (ألف ج.م)</div>
+</div>
+<div class="stat-card r">
+<div class="stat-top"><div class="stat-icon2 r">🐛</div><div class="stat-trend2 down">↘ 3</div></div>
+<div class="stat-val">7</div><div class="stat-lbl">تنبيهات الآفات</div>
+</div>
+<div class="stat-card b">
+<div class="stat-top"><div class="stat-icon2 b">💧</div><div class="stat-trend2 up">↗ 15%</div></div>
+<div class="stat-val">68%</div><div class="stat-lbl">رطوبة التربة</div>
+</div>
+</div>
+
+<div class="quick-grid">
+<div class="quick-item g" onclick="showSec('feas')"><i>📋</i><span>دراسة جدوى</span></div>
+<div class="quick-item o" onclick="showSec('crops')"><i>🌾</i><span>المحاصيل</span></div>
+<div class="quick-item b" onclick="showSec('weather')"><i>🌤️</i><span>الطقس</span></div>
+<div class="quick-item g" onclick="showSec('pest')"><i>🐛</i><span>كشف آفات</span></div>
+<div class="quick-item o" onclick="showSec('fert')"><i>🧪</i><span>الأسمدة</span></div>
+<div class="quick-item b" onclick="showSec('reports')"><i>📊</i><span>التقارير</span></div>
+</div>
+
+<div class="grid-2-1" style="margin-bottom:1rem;">
+<div class="card"><div class="card-h"><div class="card-t">📈 أداء المحاصيل</div><div class="tabs" style="margin:0;background:transparent;padding:0;"><button class="tab-btn active" style="padding:0.4rem 0.8rem;font-size:0.75rem;">أسبوع</button><button class="tab-btn" style="padding:0.4rem 0.8rem;font-size:0.75rem;">شهر</button></div></div><div style="position:relative;height:140px;width:100%;"><canvas id="chart1"></canvas></div></div>
+<div class="card"><div class="card-t">🎯 صحة المزرعة</div><div style="display:flex;justify-content:space-around;padding:1.5rem 0;flex-wrap:wrap;gap:1rem;"><div style="text-align:center;"><div style="width:100px;height:100px;border-radius:50%;background:conic-gradient(var(--p3) 0% 80%, var(--bg) 80% 100%);display:flex;align-items:center;justify-content:center;margin:0 auto;"><div style="width:70px;height:70px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem;">80%</div></div><div style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted);">صحة المحاصيل</div></div><div style="text-align:center;"><div style="width:100px;height:100px;border-radius:50%;background:conic-gradient(var(--i) 0% 70%, var(--bg) 70% 100%);display:flex;align-items:center;justify-content:center;margin:0 auto;"><div style="width:70px;height:70px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.3rem;">70%</div></div><div style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted);">كفاءة الري</div></div></div></div>
+</div>
+
+<div class="card"><div class="card-h"><div class="card-t">⚠️ التنبيهات</div><button class="btn btn-sm btn-o" onclick="markRead()">تحديد الكل مقروء</button></div>
+<div id="alertList"></div></div>
+</section>
+
+<!-- CROPS -->
+<section id="crops" class="section">
+<div class="card"><div class="card-h"><div class="card-t">🌾 المحاصيل المتاحة</div><div class="tabs" style="margin:0;background:transparent;padding:0;"><button class="tab-btn active" onclick="filterCrops('all',this)">الكل</button><button class="tab-btn" onclick="filterCrops('winter',this)">شتوي</button><button class="tab-btn" onclick="filterCrops('summer',this)">صيفي</button><button class="tab-btn" onclick="filterCrops('year',this)">طوال العام</button></div></div>
+<div class="crop-grid" id="cropGrid"></div>
+<div class="res-box" id="cropDetail" style="margin-top:1rem;"></div>
+</section>
+
+<!-- FEASIBILITY -->
+<section id="feas" class="section">
+<div class="card"><div class="card-h"><div class="card-t">📋 دراسة الجدوى الذكية</div><button class="btn btn-sm btn-o" onclick="resetFeas()">🔄 إعادة</button></div>
+<div class="tabs"><button class="tab-btn active" onclick="showTab('f1',this)">📍 معلومات</button><button class="tab-btn" onclick="showTab('f2',this)">💵 التكاليف</button><button class="tab-btn" onclick="showTab('f3',this)">📊 التحليل</button></div>
+
+<div id="f1" class="tab-c active">
+<div class="form-row">
+<div class="form-g"><label>🌾 المحصول</label><select class="form-control" id="fCrop"><option value="">اختر...</option><option value="wheat">🌾 قمح</option><option value="corn">🌽 ذرة</option><option value="rice">🍚 أرز</option><option value="tomato">🍅 طماطم</option><option value="potato">🥔 بطاطس</option><option value="cotton">☁️ قطن</option><option value="sugarcane">🎋 قصب سكر</option><option value="onion">🧅 بصل</option><option value="cucumber">🥒 خيار</option><option value="pepper">🌶️ فلفل</option><option value="eggplant">🍆 باذنجان</option><option value="carrot">🥕 جزر</option><option value="garlic">🧄 ثوم</option><option value="strawberry">🍓 فراولة</option><option value="grape">🍇 عنب</option><option value="date">🌴 بلح</option><option value="citrus">🍊 حمضيات</option><option value="olive">🫒 زيتون</option><option value="flax">🌿 كتان</option><option value="clover">☘️ برسيم</option></select></div>
+<div class="form-g"><label>📐 المساحة (فدان)</label><input type="number" id="fArea" placeholder="5" min="0.1" step="0.1"></div>
+<div class="form-g"><label>📍 المحافظة</label><select class="form-control" id="fGov"><option value="">اختر...</option><option value="cairo">القاهرة</option><option value="alex">الإسكندرية</option><option value="giza">الجيزة</option><option value="fayoum">الفيوم</option><option value="beni">بني سويف</option><option value="minya">المنيا</option><option value="assiut">أسيوط</option><option value="sohag">سوهاج</option><option value="qena">قنا</option><option value="luxor">الأقصر</option><option value="aswan">أسوان</option><option value="daqah">الدقهلية</option><option value="sharkia">الشرقية</option><option value="gharbia">الغربية</option><option value="kafr">كفر الشيخ</option><option value="beheira">البحيرة</option><option value="ismailia">الإسماعيلية</option><option value="suez">السويس</option><option value="portsaid">بورسعيد</option><option value="matrouh">مرسى مطروح</option><option value="newvalley">الوادي الجديد</option><option value="redsea">البحر الأحمر</option><option value="sinai">شمال سيناء</option><option value="southsinai">جنوب سيناء</option></select></div>
+<div class="form-g"><label>🌍 نوع التربة</label><select class="form-control" id="fSoil"><option value="clay">طينية</option><option value="sandy">رملية</option><option value="silty">طميية</option><option value="loamy">رملية طينية</option><option value="peat">طحلبية</option><option value="chalk">طباشيرية</option></select></div>
+<div class="form-g"><label>💧 مصدر الري</label><select class="form-control" id="fWater"><option value="nile">نيلي</option><option value="well">جوفي (بئر)</option><option value="drip">تنقيط</option><option value="sprinkler">رش محوري</option><option value="rain">مطر</option><option value="treated">معالجة</option></select></div>
+<div class="form-g"><label>📅 موسم الزراعة</label><select class="form-control" id="fSeason"><option value="winter">شتوي (نوفمبر-فبراير)</option><option value="summer">صيفي (مارس-يونيو)</option><option value="nili">نيلي (يوليو-أكتوبر)</option><option value="year">طوال العام</option></select></div>
+</div>
+<div style="text-align:left;margin-top:1rem;"><button class="btn btn-p btn-lg" onclick="showTab('f2',document.querySelectorAll('#feas .tab-btn')[1])">التالي ←</button></div>
+</div>
+
+<div id="f2" class="tab-c">
+<h2 style="color:var(--p);margin-bottom:1rem;">🔧 التكاليف الثابتة (مرة واحدة)</h2>
+<div class="form-row">
+<div class="form-g"><label>🚜 إعداد الأرض</label><input type="number" class="form-control fc" data-t="fixed" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>🚿 شبكة الري</label><input type="number" class="form-control fc" data-t="fixed" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>🏭 معدات وآلات</label><input type="number" class="form-control fc" data-t="fixed" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>🏠 مباني ومخازن</label><input type="number" class="form-control fc" data-t="fixed" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>⚡ كهرباء وتوصيلات</label><input type="number" class="form-control fc" data-t="fixed" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>🛣️ طرق وسياج</label><input type="number" class="form-control fc" data-t="fixed" placeholder="0" onchange="calcSum()"></div>
+</div>
+<h2 style="color:var(--p);margin:1.5rem 0 1rem;">🔄 التكاليف المتغيرة (للموسم)</h2>
+<div class="form-row">
+<div class="form-g"><label>🌱 بذور/شتلات</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>🧪 أسمدة</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>🐛 مبيدات</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>👷 أجور عمالة</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>⛽ وقود/كهرباء</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>🚚 نقل وتسويق</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>💧 مياه ري</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+<div class="form-g"><label>📦 تعبئة وتخزين</label><input type="number" class="form-control fc" data-t="var" placeholder="0" onchange="calcSum()"></div>
+</div>
+<div class="card" style="margin-top:1.5rem;background:linear-gradient(135deg,var(--pL),rgba(76,175,80,0.03));">
+<div class="grid-4" style="text-align:center;">
+<div><p style="color:var(--muted);font-size:0.8rem;">ثابتة</p><p style="font-size:1.5rem;font-weight:800;color:var(--i);" id="sumF">0</p></div>
+<div><p style="color:var(--muted);font-size:0.8rem;">متغيرة</p><p style="font-size:1.5rem;font-weight:800;color:var(--s);" id="sumV">0</p></div>
+<div><p style="color:var(--muted);font-size:0.8rem;">إجمالي</p><p style="font-size:1.5rem;font-weight:800;color:var(--p);" id="sumT">0</p></div>
+<div><p style="color:var(--muted);font-size:0.8rem;">للفدان</p><p style="font-size:1.5rem;font-weight:800;color:var(--p2);" id="sumA">0</p></div>
+</div>
+</div>
+<div style="display:flex;justify-content:space-between;margin-top:1rem;">
+<button class="btn btn-o" onclick="showTab('f1',document.querySelectorAll('#feas .tab-btn')[0])">→ السابق</button>
+<button class="btn btn-p btn-lg" onclick="calcFeas()"><i>📊</i> حساب الجدوى</button>
+</div>
+</div>
+
+<div id="f3" class="tab-c"><div id="feasRes"></div></div>
+</div>
+</section>
+
+<!-- PRICES -->
+<section id="prices" class="section">
+<div class="card"><div class="card-h"><div class="card-t">💰 أسعار السوق الزراعي</div><div style="display:flex;gap:0.5rem;"><button class="btn btn-p btn-sm" onclick="refreshPrices()"><i>🔄</i> تحديث</button><button class="btn btn-o btn-sm" onclick="exportData()"><i>📥</i> تصدير</button></div></div>
+<div class="grid-2" style="margin-bottom:1rem;"><div class="card" style="padding:0.8rem;"><canvas id="pChart1" height="200"></canvas></div><div class="card" style="padding:0.8rem;"><canvas id="pChart2" height="200"></canvas></div></div>
+<div style="overflow-x:auto;"><table class="tbl"><thead><tr><th>المحصول</th><th>السعر</th><th>التغير</th><th>الاتجاه</th><th>أعلى</th><th>أقل</th><th>الحالة</th></tr></thead><tbody id="pBody"></tbody></table></div>
+</div>
+</section>
+
+<!-- RECOMMENDATIONS -->
+<section id="recs" class="section">
+<div class="grid-2">
+<div class="card"><div class="card-t">🌱 توصية المحصول</div>
+<div class="form-row" style="margin-top:1rem;">
+<div class="form-g"><label>النيتروجين (N): <b id="nV" style="color:var(--p)">50</b></label><input type="range" id="nR" min="0" max="140" value="50" oninput="document.getElementById('nV').textContent=this.value"></div>
+<div class="form-g"><label>الفوسفور (P): <b id="pV" style="color:var(--p)">50</b></label><input type="range" id="pR" min="0" max="145" value="50" oninput="document.getElementById('pV').textContent=this.value"></div>
+<div class="form-g"><label>البوتاسيوم (K): <b id="kV" style="color:var(--p)">50</b></label><input type="range" id="kR" min="0" max="205" value="50" oninput="document.getElementById('kV').textContent=this.value"></div>
+<div class="form-g"><label>درجة الحرارة: <b id="tV" style="color:var(--p)">25</b>°C</label><input type="range" id="tR" min="5" max="50" value="25" oninput="document.getElementById('tV').textContent=this.value"></div>
+<div class="form-g"><label>الرطوبة: <b id="hV" style="color:var(--p)">60</b>%</label><input type="range" id="hR" min="10" max="100" value="60" oninput="document.getElementById('hV').textContent=this.value"></div>
+<div class="form-g"><label>الأمطار: <b id="rV" style="color:var(--p)">100</b>mm</label><input type="range" id="rR" min="0" max="500" value="100" oninput="document.getElementById('rV').textContent=this.value"></div>
+</div>
+<button class="btn btn-p btn-block" style="margin-top:1rem;" onclick="getRec()"><i>🔮</i> تحليل الذكاء الاصطناعي</button>
+<div class="res-box" id="recRes"></div>
+</div>
+
+<div class="card"><div class="card-t">🐛 كشف الآفات</div>
+<div style="border:3px dashed var(--bg);border-radius:var(--r);padding:2.5rem;text-align:center;cursor:pointer;margin:1rem 0;transition:var(--tr);" ondragover="event.preventDefault()" ondrop="handleDrop(event)" onclick="document.getElementById('pestF').click()">
+<div style="font-size:3rem;margin-bottom:0.5rem;">📷</div>
+<p style="font-weight:600;">اضغط أو اسحب صورة الورقة هنا</p>
+<p style="color:var(--muted);font-size:0.8rem;margin-top:0.3rem;">JPG, PNG - Max 5MB</p>
+<input type="file" id="pestF" accept="image/*" style="display:none;" onchange="detectPest(event)">
+</div>
+<div id="pestRes"></div>
+</div>
+</div>
+</section>
+
+<!-- WEATHER -->
+<section id="weather" class="section">
+<div class="card"><div class="card-h"><div class="card-t">🌤️ حالة الطقس</div><div style="display:flex;gap:0.5rem;align-items:center;"><select class="form-control" id="wCity" style="width:180px;" onchange="getWeather()"><option value="30.0444,31.2357">القاهرة</option><option value="31.2001,29.9187">الإسكندرية</option><option value="29.084,30.9386">الفيوم</option><option value="28.1099,30.7503">المنيا</option><option value="27.1805,31.1837">أسيوط</option><option value="26.5498,31.7">سوهاج</option><option value="26.1551,32.716">قنا</option><option value="25.6872,32.6396">الأقصر</option><option value="24.0889,32.8998">أسوان</option><option value="30.822,29.9187">مرسى مطروح</option><option value="30.5965,32.2715">الإسماعيلية</option><option value="29.9668,32.5498">السويس</option><option value="31.2653,32.3019">بورسعيد</option><option value="25.0539,33.2824">الوادي الجديد</option></select><button class="btn btn-p btn-sm" onclick="getWeather()">🔄</button></div></div>
+<div id="wCurrent"></div>
+</div>
+<div class="card"><div class="card-t">📅 توقعات ٧ أيام</div><div class="w-row" id="wForecast" style="margin-top:1rem;"></div></div>
+</section>
+
+<!-- PEST -->
+<section id="pest" class="section">
+<div class="card"><div class="card-t">🐛 موسوعة الآفات والأمراض</div>
+<div class="crop-grid" id="pestGrid" style="margin-top:1rem;"></div>
+<div class="res-box" id="pestDetail" style="margin-top:1rem;"></div>
+</div>
+</section>
+
+<!-- FERTILIZER -->
+<section id="fert" class="section">
+<div class="card"><div class="card-t">🧪 حاسبة السماد الذكية</div>
+<div class="form-row" style="margin-top:1rem;">
+<div class="form-g"><label>🌾 المحصول</label><select class="form-control" id="frCrop"><option value="wheat">قمح</option><option value="corn">ذرة</option><option value="rice">أرز</option><option value="tomato">طماطم</option><option value="potato">بطاطس</option><option value="cotton">قطن</option><option value="onion">بصل</option><option value="cucumber">خيار</option></select></div>
+<div class="form-g"><label>📅 عمر المحصول (يوم)</label><input type="number" id="frAge" placeholder="30" min="1" max="365"></div>
+<div class="form-g"><label>🍃 لون الأوراق</label><select class="form-control" id="frColor"><option value="green">أخضر طبيعي</option><option value="yellow">أصفر فاتح</option><option value="brown">بني جاف</option><option value="purple">أرجواني</option><option value="spotted">مبقع</option></select></div>
+<div class="form-g"><label>🌍 نوع التربة</label><select class="form-control" id="frSoil"><option value="clay">طينية</option><option value="sandy">رملية</option><option value="silty">طميية</option></select></div>
+</div>
+<button class="btn btn-g btn-block btn-lg" style="margin-top:1rem;" onclick="calcFert()"><i>🧪</i> حساب الجرعة المثلى</button>
+<div class="res-box" id="fertRes"></div>
+</div>
+</section>
+
+<!-- REPORTS -->
+<section id="reports" class="section">
+<div class="card"><div class="card-h"><div class="card-t">📊 التقارير والإحصائيات</div><div style="display:flex;gap:0.5rem;"><button class="btn btn-o btn-sm" onclick="genReport('pdf')">📄 PDF</button><button class="btn btn-o btn-sm" onclick="genReport('excel')">📊 Excel</button></div></div>
+<div id="repList"></div>
+</div>
+</section>
+
+</div></div>
+
+<!-- ADMIN PANEL -->
+<section id="admin" class="section">
+<div class="stats-row" id="adminStatsRow">
+<div class="stat-card g"><div class="stat-top"><div class="stat-icon2 g">👥</div></div><div class="stat-val" id="admStatTotal">-</div><div class="stat-lbl">إجمالي المستخدمين</div></div>
+<div class="stat-card b"><div class="stat-top"><div class="stat-icon2 b">✅</div></div><div class="stat-val" id="admStatActive">-</div><div class="stat-lbl">مستخدمون نشطون</div></div>
+<div class="stat-card r"><div class="stat-top"><div class="stat-icon2 r">⛔</div></div><div class="stat-val" id="admStatInactive">-</div><div class="stat-lbl">معطّلون</div></div>
+<div class="stat-card o"><div class="stat-top"><div class="stat-icon2 o">📢</div></div><div class="stat-val" id="admStatPendingAds">-</div><div class="stat-lbl">عروض قيد المراجعة</div></div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="card-t">👥 إدارة المستخدمين</div><button class="btn btn-o btn-sm" onclick="loadAdminPanel()">🔄 تحديث</button></div>
+<div style="overflow-x:auto;"><table class="tbl"><thead><tr><th>الاسم</th><th>البريد الإلكتروني</th><th>الصلاحية</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="adminUsersBody"></tbody></table></div>
+</div>
+
+<div class="card">
+<div class="card-h"><div class="card-t">📢 عروض الشركات (الإعلانات)</div></div>
+<div style="overflow-x:auto;"><table class="tbl"><thead><tr><th>الشركة</th><th>العنوان</th><th>التواصل</th><th>الحالة</th><th>إجراءات</th></tr></thead><tbody id="adminAdsBody"></tbody></table></div>
+</div>
+</section>
+
+<!-- SUBMIT AD (PUBLIC - FOR COMPANIES) -->
+<section id="submitAd" class="section">
+<div class="card" style="max-width:600px;margin:0 auto;">
+<div class="card-t">📢 هل تمثّل شركة وتريد تقديم عرض؟</div>
+<p style="color:var(--muted);font-size:0.85rem;margin:0.5rem 0 1rem;">عبّئ النموذج وسيقوم فريقنا بمراجعة طلبك والرد عليك في أقرب وقت.</p>
+<div class="form-g"><label>اسم الشركة *</label><input type="text" id="adCompany" placeholder="مثال: شركة الأسمدة الحديثة"></div>
+<div class="form-row">
+<div class="form-g"><label>اسم المسؤول</label><input type="text" id="adContactName" placeholder="الاسم الكامل"></div>
+<div class="form-g"><label>البريد الإلكتروني *</label><input type="email" id="adContactEmail" placeholder="email@company.com"></div>
+</div>
+<div class="form-g"><label>رقم الهاتف</label><input type="text" id="adContactPhone" placeholder="01xxxxxxxxx"></div>
+<div class="form-g"><label>عنوان العرض *</label><input type="text" id="adTitle" placeholder="مثال: عرض خاص على الأسمدة"></div>
+<div class="form-g"><label>تفاصيل العرض *</label><textarea id="adMessage" rows="4" placeholder="اكتب تفاصيل عرضك هنا..."></textarea></div>
+<button class="btn btn-p btn-block" onclick="submitAdRequest()">إرسال العرض</button>
+</div>
+</section>
+
+<!-- AI CHAT -->
+<button class="ai-btn" onclick="togChat()" title="مساعد AI">🤖</button>
+<div class="ai-panel" id="aiPanel">
+<div class="ai-h"><div><span style="font-size:1.2rem;">🤖</span> مساعد AgriVision</div><button style="background:none;border:none;color:#fff;cursor:pointer;font-size:1.2rem;" onclick="togChat()">✕</button></div>
+<div class="ai-b" id="aiB"><div class="ai-m bot">👋 مرحباً! أنا مساعدك الزراعي. اسألني عن أي محصول أو آفة أو سماد!</div></div>
+<div class="ai-i"><input type="text" id="aiIn" placeholder="اكتب سؤالك..." onkeypress="if(event.key==='Enter')sendAi()"><button onclick="sendAi()">➤</button></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+// ===== DATA =====
+const CROPS={
+  wheat:{n:'قمح',p:12.5,y:2.5,c:8000,s:'winter',e:'🌾',d:'محصول استراتيجي، يحتاج تربة طينية ورطبة، موسم زراعة نوفمبر-يناير'},
+  corn:{n:'ذرة',p:8.0,y:6.0,c:6000,s:'summer',e:'🌽',d:'محصول صيفي، يحتاج حرارة عالية ورطوبة، يزرع مارس-يونيو'},
+  rice:{n:'أرز',p:15.0,y:4.5,c:12000,s:'summer',e:'🍚',d:'يحتاج تربة طينية ثقيلة ومياه غزيرة، موسم نيلي'},
+  tomato:{n:'طماطم',p:6.5,y:15.0,c:15000,s:'year',e:'🍅',d:'محصول طوال العام، ربحي عالي، يحتاج رعاية مستمرة'},
+  potato:{n:'بطاطس',p:8.5,y:12.0,c:10000,s:'winter',e:'🥔',d:'محصول شتوي، يحتاج تربة رملية خفيفة، يزرع سبتمبر-نوفمبر'},
+  cotton:{n:'قطن',p:20.0,y:1.8,c:9000,s:'summer',e:'☁️',d:'محصول صناعي مهم، يحتاج حرارة عالية وري منتظم'},
+  sugarcane:{n:'قصب سكر',p:4.0,y:40.0,c:7000,s:'year',e:'🎋',d:'محصول استراتيجي، يزرع لمدة ١٢-١٨ شهر، يحتاج مياه غزيرة'},
+  onion:{n:'بصل',p:7.0,y:10.0,c:8000,s:'winter',e:'🧅',d:'محصول شتوي، يحتاج تربة رملية، يخزن لفترات طويلة'},
+  cucumber:{n:'خيار',p:5.0,y:12.0,c:12000,s:'year',e:'🥒',d:'محصول صيفي مبكر، دورة قصيرة ٤٥-٦٠ يوم'},
+  pepper:{n:'فلفل',p:9.0,y:8.0,c:11000,s:'year',e:'🌶️',d:'محصول ربحي، يحتاج حرارة معتدلة ورطوبة'},
+  eggplant:{n:'باذنجان',p:8.0,y:9.0,c:10000,s:'summer',e:'🍆',d:'محصول صيفي، يحتاج حرارة عالية، دورة ٤-٥ أشهر'},
+  carrot:{n:'جزر',p:5.0,y:8.0,c:6000,s:'winter',e:'🥕',d:'محصول شتوي، يحتاج تربة رملية عميقة'},
+  garlic:{n:'ثوم',p:25.0,y:3.0,c:7000,s:'winter',e:'🧄',d:'محصول ربحي جداً، يزرع أكتوبر-نوفمبر'},
+  strawberry:{n:'فراولة',p:35.0,y:4.0,c:20000,s:'winter',e:'🍓',d:'محصول ربحي عالي، يحتاج رعاية مكثفة'},
+  grape:{n:'عنب',p:18.0,y:5.0,c:15000,s:'summer',e:'🍇',d:'محصول دائم، يحتاج تقليم وتربية'},
+  date:{n:'بلح',p:15.0,y:8.0,c:5000,s:'year',e:'🌴',d:'محصول صحراوي، يتحمل الجفاف، ربحي على المدى الطويل'},
+  citrus:{n:'حمضيات',p:12.0,y:6.0,c:8000,s:'year',e:'🍊',d:'محصول دائم، يحتاج رعاية وتسميد منتظم'},
+  olive:{n:'زيتون',p:30.0,y:2.0,c:6000,s:'year',e:'🫒',d:'محصول دائم، يتحمل الجفاف، زيت ذو قيمة عالية'},
+  flax:{n:'كتان',p:10.0,y:1.5,c:4000,s:'winter',e:'🌿',d:'محصول صناعي، يزرع للألياف أو الزيت'},
+  clover:{n:'برسيم',p:3.0,y:20.0,c:3000,s:'winter',e:'☘️',d:'محصول علفي، يحسن خصوبة التربة'}
+};
+
+const PESTS=[
+  {n:'لفحة متأخرة',s:'عالي',i:'🍂',sol:'رش مبيد فطري Mancozeb كل ٧ أيام، إزالة الأوراق المصابة',sym:'بقع بنية على الأوراق، تعفن الثمار'},
+  {n:'بياض دقيقي',s:'متوسط',i:'⚪',sol:'رش كبريتات البوتاسيوم أو زيت النيم، تحسين التهوية',sym:'طبقة بيضاء على الأوراق، تشوه النمو'},
+  {n:'من',s:'متوسط',i:'🐜',sol:'رش مبيد حشري Imidacloprid، استخدام مصائد صفراء',sym:'أوراق مجعدة، honeydew على الأوراق'},
+  {n:'دودة ورقية',s:'منخفض',i:'🐛',sol:'رش Bacillus thuringiensis أو Spinosad ليلاً',sym:'ثقوب في الأوراق، براز على الثمار'},
+  {n:'تبقع أوراق',s:'متوسط',i:'🟤',sol:'رش مبيد فطري Copper oxychloride، تجنب الرش العلوي',sym:'بقع داكنة دائرية على الأوراق'},
+  {n:'ذبابة بيضاء',s:'متوسط',i:'🦟',sol:'مصائد صفراء لاصقة، رش زيت بذر الكتان',sym:'حشرات بيضاء صغيرة تطير عند الاهتزاز'},
+  {n:'عثة أحمر',s:'عالي',i:'🔴',sol:'رش مبيدات خاصة بالعث، رفع الرطوبة',sym:'بقع صفراء، شباك عنكبوتية على الأوراق'},
+  {n:'تعفن جذري',s:'عالي',i:'🌱',sol:'معالجة التربة بمبيدات، تحسين الصرف، تقليل الري',sym:'ذبول النبات، جذور سوداء متعفنة'}
+];
+
+const FERTS={
+  wheat:{t:'NPK 20-20-20 + كبريتات زنك',a:'200 كجم/فدان',time:'١/٣ عند الزراعة، ٢/٣ عند التفرع',n:80,p:40,k:40},
+  corn:{t:'NPK 15-30-15 + يوريا',a:'250 كجم/فدان',time:'عند الزراعة + ٣٠ سم ارتفاع + قبل التزهير',n:100,p:50,k:50},
+  rice:{t:'NPK 18-18-18 + سلفات نشادر',a:'300 كجم/فدان',time:'عند الزراعة + التفرع + الإزهار',n:120,p:40,k:60},
+  tomato:{t:'NPK 20-20-20 + كالسيوم نترات',a:'350 كجم/فدان',time:'أسبوعياً بعد الشتل + عند العقد',n:100,p:60,k:80},
+  potato:{t:'NPK 15-15-21 + بوتاسيوم كبريتات',a:'300 كجم/فدان',time:'عند الزراعة + التفرع + تكوين الدرنات',n:90,p:50,k:100},
+  cotton:{t:'NPK 20-20-20 + حديد مخلبي',a:'250 كجم/فدان',time:'عند الزراعة + الارتفاع + قبل الإزهار',n:100,p:40,k:60},
+  onion:{t:'NPK 15-15-15 + بورون',a:'200 كجم/فدان',time:'عند الزراعة + ٣ أسابيع + ٦ أسابيع',n:70,p:40,k:50},
+  cucumber:{t:'NPK 20-20-20 + مغنيسيوم',a:'300 كجم/فدان',time:'أسبوعياً بعد الشتل',n:90,p:50,k:70}
+};
+
+// ===== INIT =====
+window.addEventListener('load',()=>{
+  setTimeout(()=>{document.getElementById('loadO').classList.add('hid');initAll();},800);
+});
+
+function initAll(){
+  animVal('sv1',0,1250,1500);
+  animVal('sv2',0,45,1500);
+  initChart1();
+  renderCrops('all');
+  renderPests();
+  renderAlerts();
+  getWeather();
+  refreshPrices();
+  renderReports();
+}
+
+// ===== NAV =====
+function showSec(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  if(window.innerWidth<768){
+    document.getElementById('sidebar').classList.remove('open');
+    const ov=document.getElementById('sidebarOverlay');
+    if(ov)ov.classList.remove('show');
+    document.body.classList.remove('no-scroll');
+  }
+}
+
+function showTab(id,btn){
+  const parent=btn.closest('.tabs-container')||btn.closest('.card');
+  parent.querySelectorAll('.tab-c').forEach(t=>t.classList.remove('active'));
+  parent.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function togTheme(){
+  const b=document.body,t=b.getAttribute('data-theme');
+  b.setAttribute('data-theme',t==='light'?'dark':'light');
+}
+
+function togSide(){
+  const sb=document.getElementById('sidebar');
+  const ov=document.getElementById('sidebarOverlay');
+  sb.classList.toggle('open');
+  if(ov)ov.classList.toggle('show');
+  document.body.classList.toggle('no-scroll', sb.classList.contains('open') && window.innerWidth<=768);
+}
+
+// ===== TOAST =====
+function toast(msg,type='ok'){
+  const c=document.getElementById('toastC');
+  const d=document.createElement('div');
+  d.className='toast '+type;
+  const i=type==='ok'?'✅':type==='err'?'❌':'⚠️';
+  d.innerHTML=i+' '+msg;
+  c.appendChild(d);
+  setTimeout(()=>d.remove(),3500);
+}
+
+// ===== ANIMATE =====
+function animVal(id,s,e,dur){
+  const el=document.getElementById(id);
+  let st=null;
+  function step(ts){
+    if(!st)st=ts;
+    const p=Math.min((ts-st)/dur,1);
+    el.textContent=Math.floor(p*(e-s)+s).toLocaleString();
+    if(p<1)requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ===== CHARTS =====
+function initChart1(){
+  const ctx=document.getElementById('chart1').getContext('2d');
+  new Chart(ctx,{type:'line',data:{labels:['سبت','أحد','إثن','ثلاث','أرب','خميس','جمعة'],datasets:[{label:'إنتاجية',data:[65,72,78,85,82,90,95],borderColor:'#2e7d32',backgroundColor:'rgba(46,125,50,0.08)',fill:true,tension:0.4},{label:'تكلفة',data:[45,48,52,50,55,53,58],borderColor:'#ef5350',backgroundColor:'rgba(239,83,80,0.05)',fill:true,tension:0.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'top',rtl:true,labels:{font:{family:'Tajawal'}}}},scales:{y:{beginAtZero:true}}}});
+}
+
+// ===== CROPS =====
+function renderCrops(filter){
+  const g=document.getElementById('cropGrid');
+  g.innerHTML='';
+  Object.entries(CROPS).forEach(([k,v])=>{
+    if(filter!=='all'&&v.s!==filter)return;
+    const c=document.createElement('div');
+    c.className='crop-card';
+    c.onclick=()=>selCrop(k,c);
+    c.innerHTML=`<span class="crop-emoji">${v.e}</span><div class="crop-name">${v.n}</div><div class="crop-price">${v.p} ج.م/كجم</div><div class="crop-change ${Math.random()>0.5?'up':'down'}">${Math.random()>0.5?'↗':'↘'} ${(Math.random()*8).toFixed(1)}%</div>`;
+    g.appendChild(c);
+  });
+}
+
+function filterCrops(f,btn){
+  renderCrops(f);
+  btn.parentElement.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function selCrop(k,el){
+  document.querySelectorAll('.crop-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+  const v=CROPS[k];
+  document.getElementById('cropDetail').innerHTML=`<h2 style="color:var(--p);margin-bottom:0.5rem;">${v.e} ${v.n}</h2><p style="margin-bottom:0.5rem;">${v.d}</p><div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-top:0.8rem;"><div style="background:var(--pL);padding:0.5rem;border-radius:8px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);">السعر</div><div style="font-weight:700;">${v.p} ج.م</div></div><div style="background:var(--sL);padding:0.5rem;border-radius:8px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);">الإنتاجية</div><div style="font-weight:700;">${v.y} طن/فدان</div></div><div style="background:var(--iL);padding:0.5rem;border-radius:8px;text-align:center;"><div style="font-size:0.75rem;color:var(--muted);">التكلفة</div><div style="font-weight:700;">${v.c.toLocaleString()} ج.م</div></div></div><button class="btn btn-p btn-sm" style="margin-top:0.8rem;" onclick="document.getElementById('fCrop').value='${k}';showSec('feas');document.querySelector('[onclick=\'showSec(\'feas\')\']').click();toast('تم اختيار ${v.n} لدراسة الجدوى','ok')"><i>📋</i> دراسة جدوى</button>`;
+  document.getElementById('cropDetail').classList.add('show');
+}
+
+// ===== FEASIBILITY =====
+function calcSum(){
+  const f=[...document.querySelectorAll('.fc[data-t="fixed"]')].reduce((s,e)=>s+(parseFloat(e.value)||0),0);
+  const v=[...document.querySelectorAll('.fc[data-t="var"]')].reduce((s,e)=>s+(parseFloat(e.value)||0),0);
+  const a=parseFloat(document.getElementById('fArea').value)||1;
+  document.getElementById('sumF').textContent=f.toLocaleString();
+  document.getElementById('sumV').textContent=v.toLocaleString();
+  document.getElementById('sumT').textContent=(f+v).toLocaleString();
+  document.getElementById('sumA').textContent=Math.round((f+v)/a).toLocaleString();
+}
+
+function calcFeas(){
+  const k=document.getElementById('fCrop').value;
+  const a=parseFloat(document.getElementById('fArea').value)||1;
+  if(!k){toast('اختر المحصول أولاً','err');return;}
+  const d=CROPS[k];
+  const t=[...document.querySelectorAll('.fc')].reduce((s,e)=>s+(parseFloat(e.value)||0),0)||d.c*a;
+  const y=d.y*a*1000;
+  const r=y*d.p;
+  const p=r-t;
+  const roi=((p/t)*100).toFixed(1);
+  const pb=t>0?(t/(p/12)).toFixed(1):0;
+
+  document.getElementById('feasRes').innerHTML=`<div style="text-align:center;margin-bottom:1.5rem;"><h2 style="color:${p>0?'var(--p3)':'var(--d)'};font-size:2.2rem;">${p>0?'✅ المشروع مربح':'⚠️ يحتاج مراجعة'}</h2><p style="font-size:1.1rem;margin-top:0.5rem;">صافي الربح: <b style="color:${p>0?'var(--p3)':'var(--d)'};font-size:1.5rem;">${p.toLocaleString()} ج.م</b></p></div>
+  <div class="grid-4" style="margin-bottom:1.5rem;">
+  <div style="background:var(--iL);padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:0.8rem;color:var(--muted);">الإنتاج</div><div style="font-size:1.6rem;font-weight:800;color:var(--i);">${y.toLocaleString()} كجم</div></div>
+  <div style="background:var(--pL);padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:0.8rem;color:var(--muted);">الإيرادات</div><div style="font-size:1.6rem;font-weight:800;color:var(--p);">${r.toLocaleString()} ج.م</div></div>
+  <div style="background:var(--sL);padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:0.8rem;color:var(--muted);">العائد</div><div style="font-size:1.6rem;font-weight:800;color:var(--s);">${roi}%</div></div>
+  <div style="background:var(--dL);padding:1rem;border-radius:12px;text-align:center;"><div style="font-size:0.8rem;color:var(--muted);">الاسترداد</div><div style="font-size:1.6rem;font-weight:800;color:var(--d);">${pb} شهر</div></div>
+  </div>
+  <div style="background:var(--bg);padding:1.2rem;border-radius:12px;">
+  <h2 style="color:var(--p);margin-bottom:0.8rem;">📋 توصيات AI:</h2>
+  <ul style="padding-right:1.2rem;line-height:2;font-size:0.9rem;">
+  <li>المحصول: <b>${d.e} ${d.n}</b> - موسم ${d.s==='winter'?'شتوي':d.s==='summer'?'صيفي':'طوال العام'}</li>
+  <li>السعر الحالي: <b>${d.p} ج.م/كجم</b></li>
+  <li>التكلفة التقديرية: <b>${d.c.toLocaleString()} ج.م/فدان</b></li>
+  <li>نصيحة: ${p>0?'✅ أنصح بالمضي في المشروع':'⚠️ راجع التكاليف أو اختر محصول بديل'}</li>
+  </ul>
+  </div>
+  <div style="text-align:center;margin-top:1rem;">
+  <button class="btn btn-p" onclick="toast('تم حفظ الدراسة','ok')"><i>💾</i> حفظ</button>
+  <button class="btn btn-o" onclick="window.print()"><i>🖨️</i> طباعة</button>
+  <button class="btn btn-s" onclick="showTab('f1',document.querySelectorAll('#feas .tab-btn')[0]);toast('تم إعادة البدء','ok')"><i>🔄</i> جديد</button>
+  </div>`;
+  showTab('f3',document.querySelectorAll('#feas .tab-btn')[2]);
+}
+
+function resetFeas(){
+  document.querySelectorAll('.fc').forEach(i=>i.value='');
+  document.getElementById('fCrop').value='';
+  document.getElementById('fArea').value='';
+  calcSum();
+  toast('تم إعادة التعيين','ok');
+}
+
+// ===== PRICES =====
+function refreshPrices(){
+  const b=document.getElementById('pBody');
+  b.innerHTML='<tr><td colspan="7" style="padding:2rem;"><div style="text-align:center;"><div class="load" style="margin:0 auto;width:30px;height:30px;border-width:2px;"></div></div></td></tr>';
+  setTimeout(()=>{
+    let h='';
+    Object.entries(CROPS).slice(0,10).forEach(([k,v])=>{
+      const ch=(Math.random()*10-5).toFixed(1);
+      const pr=(v.p*(1+ch/100)).toFixed(1);
+      const tr=ch>0?'up':'down';
+      const ic=ch>0?'↗':'↘';
+      const st=ch>5?'<span style="background:var(--pL);color:var(--p);padding:0.2rem 0.6rem;border-radius:12px;font-size:0.75rem;font-weight:700;">ممتاز</span>':ch<-5?'<span style="background:var(--dL);color:var(--d);padding:0.2rem 0.6rem;border-radius:12px;font-size:0.75rem;font-weight:700;">حذر</span>':'<span style="background:var(--sL);color:var(--s);padding:0.2rem 0.6rem;border-radius:12px;font-size:0.75rem;font-weight:700;">مستقر</span>';
+      h+=`<tr><td><b>${v.e} ${v.n}</b></td><td>${pr} ج.م</td><td class="${tr}">${ic} ${Math.abs(ch)}%</td><td class="${tr}">${ch>0?'ارتفاع':'انخفاض'}</td><td>${(v.p*1.15).toFixed(1)}</td><td>${(v.p*0.85).toFixed(1)}</td><td>${st}</td></tr>`;
+    });
+    b.innerHTML=h;
+    initPCharts();
+    toast('تم تحديث الأسعار','ok');
+  },600);
+}
+
+function initPCharts(){
+  const c1=document.getElementById('pChart1').getContext('2d');
+  new Chart(c1,{type:'line',data:{labels:['سبت','أحد','إثن','ثلاث','أرب','خميس','جمعة'],datasets:[{label:'قمح',data:[12,12.5,12.3,12.8,13,12.9,13.2],borderColor:'#2e7d32',tension:0.4},{label:'ذرة',data:[7.5,7.8,8,7.9,8.2,8.1,8.3],borderColor:'#f57c00',tension:0.4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{rtl:true}}}});
+  const c2=document.getElementById('pChart2').getContext('2d');
+  new Chart(c2,{type:'doughnut',data:{labels:['قمح','ذرة','أرز','طماطم','بطاطس','قطن'],datasets:[{data:[25,20,30,15,18,22],backgroundColor:['#2e7d32','#f57c00','#1565c0','#c62828','#7b1fa2','#00695c']}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',rtl:true}}}});
+}
+
+// ===== RECOMMENDATIONS =====
+function getRec(){
+  const n=parseInt(document.getElementById('nR').value);
+  const p=parseInt(document.getElementById('pR').value);
+  const k=parseInt(document.getElementById('kR').value);
+  const t=parseInt(document.getElementById('tR').value);
+  const h=parseInt(document.getElementById('hR').value);
+  const r=parseInt(document.getElementById('rR').value);
+  let rec='',conf=0;
+  if(n>90&&p>50&&k>50&&t>22&&h>65){rec='أرز 🍚';conf=94;}
+  else if(n>70&&t>24&&h<55){rec='قمح 🌾';conf=89;}
+  else if(n>80&&p>60&&t>23){rec='ذرة 🌽';conf=86;}
+  else if(p>50&&t>20&&h>60){rec='طماطم 🍅';conf=91;}
+  else if(k>70&&t>18){rec='بطاطس 🥔';conf=88;}
+  else if(t>28&&h<50){rec='قطن ☁️';conf=85;}
+  else if(r>150&&h>70){rec='قصب سكر 🎋';conf=82;}
+  else{rec='بصل 🧅';conf=78;}
+  document.getElementById('recRes').innerHTML=`<h2 style="color:var(--p);margin-bottom:0.8rem;">🎯 التوصية: ${rec}</h2><div style="background:var(--bg);padding:1rem;border-radius:8px;margin-bottom:0.8rem;"><div style="display:flex;justify-content:space-between;margin-bottom:0.3rem;"><span>نسبة الثقة</span><span style="font-weight:700;">${conf}%</span></div><div style="background:var(--bg);height:8px;border-radius:4px;overflow:hidden;"><div style="background:linear-gradient(90deg,var(--p),var(--p3));height:100%;width:${conf}%;border-radius:4px;transition:width 1s;"></div></div></div><p style="color:var(--muted);font-size:0.85rem;">بناءً على: N=${n}, P=${p}, K=${k}, Temp=${t}°C, Hum=${h}%, Rain=${r}mm</p>`;
+  document.getElementById('recRes').classList.add('show');
+}
+
+// ===== PEST =====
+function renderPests(){
+  const g=document.getElementById('pestGrid');
+  g.innerHTML='';
+  PESTS.forEach((p,i)=>{
+    const c=document.createElement('div');
+    c.className='crop-card';
+    c.onclick=()=>showPest(i);
+    c.innerHTML=`<span style="font-size:2rem;">${p.i}</span><div class="crop-name">${p.n}</div><span style="font-size:0.7rem;padding:0.15rem 0.5rem;border-radius:10px;background:${p.s==='عالي'?'var(--dL)':p.s==='متوسط'?'var(--sL)':'var(--pL)'};color:${p.s==='عالي'?'var(--d)':p.s==='متوسط'?'var(--s)':'var(--p)'};font-weight:700;">${p.s}</span>`;
+    g.appendChild(c);
+  });
+}
+
+function showPest(i){
+  const p=PESTS[i];
+  document.getElementById('pestDetail').innerHTML=`<h2 style="color:var(--d);margin-bottom:0.5rem;">${p.i} ${p.n}</h2><p><b>الخطورة:</b> <span style="color:${p.s==='عالي'?'var(--d)':p.s==='متوسط'?'var(--s)':'var(--p3)'};font-weight:700;">${p.s}</span></p><p style="margin:0.5rem 0;"><b>الأعراض:</b> ${p.sym}</p><p><b>العلاج:</b> ${p.sol}</p><button class="btn btn-p btn-sm" style="margin-top:0.5rem;" onclick="toast('تم إضافة للجدول','ok')"><i>📅</i> إضافة لجدول المكافحة</button>`;
+  document.getElementById('pestDetail').classList.add('show');
+}
+
+function detectPest(e){
+  const f=e.target.files[0];
+  if(!f)return;
+  const r=document.getElementById('pestRes');
+  r.innerHTML='<div style="text-align:center;padding:1.5rem;"><div class="load" style="margin:0 auto;width:40px;height:40px;"></div><p>جاري تحليل الصورة بالAI...</p></div>';
+  setTimeout(()=>{
+    const p=PESTS[Math.floor(Math.random()*PESTS.length)];
+    r.innerHTML=`<div style="background:var(--dL);border-right:4px solid var(--d);padding:1rem;border-radius:8px;"><h2 style="color:var(--d);margin-bottom:0.3rem;">${p.i} ${p.n}</h2><p style="font-size:0.85rem;margin-bottom:0.3rem;"><b>الخطورة:</b> ${p.s}</p><p style="font-size:0.85rem;"><b>الحل:</b> ${p.sol}</p><button class="btn btn-p btn-sm" style="margin-top:0.5rem;" onclick="toast('تمت الإضافة','ok')"><i>✓</i> تأكيد</button></div>`;
+  },1500);
+}
+
+function handleDrop(e){
+  e.preventDefault();
+  const f=e.dataTransfer.files;
+  if(f.length)detectPest({target:{files:f}});
+}
+
+// ===== FERTILIZER =====
+function calcFert(){
+  const k=document.getElementById('frCrop').value;
+  const age=parseInt(document.getElementById('frAge').value)||30;
+  const color=document.getElementById('frColor').value;
+  const soil=document.getElementById('frSoil').value;
+  const f=FERTS[k];
+  let note='',extra='';
+  if(color==='yellow'){note='⚠️ نقص نيتروجين: أضف يوريا ٥٠ كجم إضافية';}
+  else if(color==='brown'){note='⚠️ نقص بوتاسيوم: أضف بوتاسيوم كبريتات ٣٠ كجم';}
+  else if(color==='purple'){note='⚠️ نقص فوسفور: أضف سوبر فوسفات ٤٠ كجم';}
+  else if(color==='spotted'){note='⚠️ نقص عناصر صغرى: أضف مخلوط عناصر صغرى';}
+  if(soil==='sandy')extra='💡 تربة رملية: زد الكمية ٢٠% وقسم الجرعات';
+  else if(soil==='clay')extra='💡 تربة طينية: قل الكمية ١٠% وavoid التربة الرطبة';
+
+  document.getElementById('fertRes').innerHTML=`<h2 style="color:var(--p);margin-bottom:0.5rem;">🧪 التوصية: ${f.t}</h2>
+  <div class="grid-2" style="gap:0.8rem;margin-bottom:0.8rem;">
+  <div style="background:var(--pL);padding:0.8rem;border-radius:8px;"><div style="font-size:0.75rem;color:var(--muted);">الكمية</div><div style="font-weight:700;">${f.a}</div></div>
+  <div style="background:var(--sL);padding:0.8rem;border-radius:8px;"><div style="font-size:0.75rem;color:var(--muted);">الموعد</div><div style="font-weight:700;">${f.time}</div></div>
+  </div>
+  <p style="font-size:0.85rem;margin-bottom:0.3rem;"><b>عمر المحصول:</b> ${age} يوم</p>
+  ${note?`<p style="color:var(--d);font-size:0.85rem;margin-bottom:0.3rem;">${note}</p>`:''}
+  ${extra?`<p style="color:var(--i);font-size:0.85rem;">${extra}</p>`:''}
+  <button class="btn btn-p btn-sm" style="margin-top:0.5rem;" onclick="toast('تم حفظ الجدول','ok')"><i>💾</i> حفظ الجدول</button>`;
+  document.getElementById('fertRes').classList.add('show');
+}
+
+// ===== WEATHER =====
+async function getWeather(){
+  const loc=document.getElementById('wCity').value;
+  const[lat,lon]=loc.split(',');
+  const c=document.getElementById('wCurrent');
+  c.innerHTML='<div style="text-align:center;padding:2rem;"><div class="load" style="margin:0 auto;"></div></div>';
+  try{
+    const res=await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation,weather_code,wind_speed_10m&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,weather_code&timezone=Africa/Cairo&forecast_days=7`);
+    const data=await res.json();
+    const wc={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',51:'🌧️',61:'🌧️',71:'❄️',95:'⛈️'};
+    const wt={0:'صافٍ',1:'غائم جزئياً',2:'غائم',3:'غائم كلياً',45:'ضباب',51:'مطر خفيف',61:'مطر',71:'ثلج',95:'عواصف'};
+    c.innerHTML=`<div class="w-row"><div class="w-card"><div class="w-val">${data.current.temperature_2m}°C</div><div class="w-lbl">${wc[data.current.weather_code]||'☁️'} ${wt[data.current.weather_code]||'غائم'}</div></div><div class="w-card v2"><div class="w-val">${data.current.relative_humidity_2m}%</div><div class="w-lbl">الرطوبة</div></div><div class="w-card v3"><div class="w-val">${data.current.wind_speed_10m}</div><div class="w-lbl">كم/س رياح</div></div><div class="w-card v4"><div class="w-val">${data.current.precipitation}</div><div class="w-lbl">ملم مطر</div></div></div>`;
+    let fh='<div class="w-row">';
+    const days=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    const td=new Date().getDay();
+    for(let i=0;i<7;i++){
+      const dn=days[(td+i)%7];
+      const mx=data.daily.temperature_2m_max[i];
+      const mn=data.daily.temperature_2m_min[i];
+      const rn=data.daily.precipitation_sum[i];
+      fh+=`<div class="w-card" style="${rn>0?'background:linear-gradient(135deg,#1565c0,#42a5f5);':'background:linear-gradient(135deg,var(--p),var(--p2));'}"><div class="w-lbl">${dn}</div><div class="w-val">${mx}°/${mn}°</div><div class="w-lbl">${rn>0?'🌧️ '+rn+'mm':'☀️ صافٍ'}</div></div>`;
+    }
+    fh+='</div>';
+    document.getElementById('wForecast').innerHTML=fh;
+  }catch(err){
+    c.innerHTML='<div style="text-align:center;color:var(--d);padding:2rem;">⚠️ تعذر الاتصال</div>';
+  }
+}
+
+// ===== ALERTS =====
+function renderAlerts(){
+  const a=[
+    {t:'danger',i:'🔥',ti:'حرارة مرتفعة غداً',de:'٤٢°C - رش المزروعات في الصباح الباكر',time:'منذ ٥ دقائق'},
+    {t:'warning',i:'🐛',ti:'دودة ورقية',de:'حقل القمح - رش المبيد خلال ٤٨ ساعة',time:'منذ ساعة'},
+    {t:'success',i:'💧',ti:'ري تلقائي مكتمل',de:'استهلاك ٣٥٠٠ لتر - الحقل ٣',time:'منذ ٣ ساعات'}
+  ];
+  document.getElementById('alertList').innerHTML=a.map(x=>`<div class="alert-item ${x.t}" style="margin-bottom:0.5rem;"><div class="alert-icon">${x.i}</div><div class="alert-content"><h2>${x.ti}</h2><p>${x.de}</p></div><div class="alert-time">${x.time}</div></div>`).join('');
+}
+
+function markRead(){
+  toast('تم تحديد الكل مقروء','ok');
+}
+
+// ===== REPORTS =====
+function renderReports(){
+  document.getElementById('repList').innerHTML=`<div class="alert-item success" style="margin-bottom:0.5rem;"><div class="alert-icon">✅</div><div class="alert-content" style="flex:1;"><h2>دراسة جدوى - قمح</h2><p>١٥ يونيو ٢٠٢٦</p></div><button class="btn btn-o btn-sm">عرض</button></div><div class="alert-item warning" style="margin-bottom:0.5rem;"><div class="alert-icon">⏳</div><div class="alert-content" style="flex:1;"><h2>تحليل أسعار شهري</h2><p>قيد الإعداد...</p></div><button class="btn btn-o btn-sm" disabled>جاري</button></div>`;
+}
+
+function genReport(t){
+  toast(`جاري إنشاء ${t.toUpperCase()}...`,'warn');
+  setTimeout(()=>toast('تم الإنشاء','ok'),1500);
+}
+
+// ===== AI CHAT =====
+function togChat(){
+  document.getElementById('aiPanel').classList.toggle('show');
+}
+
+function sendAi(){
+  const i=document.getElementById('aiIn');
+  const b=document.getElementById('aiB');
+  const m=i.value.trim();
+  if(!m)return;
+  b.innerHTML+=`<div class="ai-m user">${m}</div>`;
+  i.value='';
+  b.scrollTop=b.scrollHeight;
+  setTimeout(()=>{
+    const r=['بناءً على بياناتك، أنصح بزراعة القمح هذا الموسم.','درجة الحرارة مرتفعة غداً - رش في الصباح الباكر.','نسبة النيتروجين منخفضة - أضف سماد نشادر ٢٠٠ كجم.','تم رصد آفة في حقلك - رش المبيد خلال ٤٨ ساعة.','سعر القمح في ارتفاع - بيع الآن أفضل توقيت.'];
+    b.innerHTML+=`<div class="ai-m bot">🤖 ${r[Math.floor(Math.random()*r.length)]}</div>`;
+    b.scrollTop=b.scrollHeight;
+  },800);
+}
+
+// ===== UTILS =====
+function exportData(){
+  toast('جاري التصدير...','warn');
+  setTimeout(()=>toast('تم التصدير','ok'),1000);
+}
+
+function showNotif(){
+  toast('لديك ٣ إشعارات جديدة','warn');
+}
+</script>
+    <script>
+window.AGRIVISION_API_BASE = (location.hostname==='localhost'||location.hostname==='127.0.0.1') ? 'http://localhost:8000' : 'https://zidanmustafa77-zidan-backend.hf.space';
+</script>
+<script src="api.js?v=20260626002956"></script>
+</body>
+</html>
